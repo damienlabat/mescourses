@@ -40,6 +40,17 @@ app.filter('FSelected', function() {
 	};
 });
 
+app.filter('FChecked', function() {
+	return function(input) {
+		if (input!=undefined) {
+			var out = [];
+			for (var i = 0; i < input.length;i++)
+				if ((input[i].show===true)&&(input[i].quantite>0)&&(input[i].checked)) out.push(input[i]);
+			return out;
+		}
+	};
+});
+
 app.filter('FArticles', function() {
 	return function(input) {
 		if (input!=undefined) {

@@ -1,4 +1,4 @@
-* {
+﻿* {
 /*	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;*/
@@ -13,20 +13,71 @@
 form {
     margin: 0;
 }
+
+
+.navbar-search input {
+    width: 100%;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    height: 30px;
+}
+
 .article {
 	color: #000;
 	font-size:1em;
-	display: block;
+	display: inline-block;
+    width:100%;
+
+    -webkit-column-break-after: always;
+    break-inside: avoid-column;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+body.check .article.checked {
+    color:#7FBF7F;
+
+    }
+
+.checkmark {
+    line-height: 8px;
+    color: #7D7D7D;
+    }
+
+.checkmark>span {
+    color: #000000;
+    font-size: 20px;
+    margin-left: -12px;
+    margin-right: -3px;
+    position: relative;
+    dislay: inline-block;
+    top: 0;
+    }
+
+li.article.checked .checkmark>span {
+    color: green;
+    font-size: 30px;
+    margin-left: -14px;
+    margin-right: -9px;
+    top: 1px;
+    visibility: visible;
+    }
+
+body.check .rayon.checked {
+    opacity: 0.5;
 }
 
 .article.qtt0{
 	color:#888;
-	font-size:.9em;
 }
 
 .less, .more, .article.qtt0 .articlename, .article.qtt1 .articlename {
-	cursor:pointer;
 	visibility:visible;
+}
+
+.less, .more, .article {
+    cursor:pointer;
 }
 
 ul, ol {
@@ -79,6 +130,15 @@ div.liste>ul.sortable>li {
     cursor:move;
 }
 
+
+.rayon > div > h3 .check-count {
+
+}
+
+.progress {
+    height: 8px;
+}
+
 .articles-row {
 	-webkit-column-width:212px;
 	-moz-column-width:212px;
@@ -86,7 +146,8 @@ div.liste>ul.sortable>li {
 	-moz-column-rule: 1px solid #ddd;
     -webkit-column-rule: 1px solid #ddd;
     column-rule: 1px solid #ddd;
-	margin-left:0
+	margin-left:0;
+    margin-bottom: 12px;
 }
 
 .article .articlename { display:inline-block; /*width:50%;*/}
@@ -95,9 +156,9 @@ div.liste>ul.sortable>li {
 .article.qtt0 span{ visibility:hidden;}
 
 
-.article .qtt, .article:hover span, .article.qtt1:hover .qtt, .article .articlename  {visibility:visible;}
+.article .qtt, .article:hover span, .article.qtt1:hover .qtt, .article .articlename, .article .checkmark  {visibility:visible;}
 
-.article.qtt1 .qtt, .article.qtt0 span, .article span {visibility:hidden;}
+.article.qtt1 .qtt, .article.qtt0 span, .article span, body.check .article.qtt1:hover .qtt {visibility:hidden;}
 
 .article.qtt span.delete, .article:hover span.delete {visibility:hidden;}
 .article.qtt0:hover span.delete {visibility:visible;}
@@ -206,3 +267,31 @@ body.check .not-in-check {
  .c7,.c7:hover,.c7:focus{background-color:#7f7f7f !important; background-image:none !important}
  .c8,.c8:hover,.c8:focus{background-color:#bcbd22 !important; background-image:none !important}
  .c9,.c9:hover,.c9:focus{background-color:#17becf !important; background-image:none !important}
+
+
+ /* On/Off FlipSwitch */
+
+.nav label.toggle {
+    width: 200px;
+    margin-bottom: 0;
+    margin-top: 8px;
+    margin-left: 75px;
+    height: 24px;
+}
+
+.nav .toggle .slide-button {
+    margin-top:0;
+}
+
+
+.nav .toggle label, .nav .toggle p, .nav .switch label {
+    line-height: 24px;
+}
+
+.nav .toggle p {
+    left: -50px;
+}
+
+.toggle p span {
+    margin-left: 50px;
+}

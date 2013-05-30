@@ -53,12 +53,12 @@
  	 	angular.forEach(content, function(value, key){
  	 		if (value.c==undefined) value.c=0;
  	 		if (value.p==undefined) value.p=0;
- 	 		var rayon={name:value.n, show:true, color:value.c, position:value.p, articles:[]}
+ 	 		var rayon={name:value.n, show:true, color:value.c, position:value.p, checked: false, articles:[]}
 
  	 		angular.forEach(value.a, function(article, key2){
  	 			if (article.v==undefined) article.v=0;
  	 			if (article.i==undefined) article.i=null;
- 	 			rayon.articles.push( {name:article.n, show:true, quantite:article.v, info:article.i} );
+ 	 			rayon.articles.push( {name:article.n, show:true, quantite:article.v, info:article.i, checked:false} );
  	 		});
  	 		liste.push(rayon);
  	 	});
@@ -66,8 +66,16 @@
 	 	return liste;
 	}
 
- 	$scope.selectArticle= function(article) {
-		$scope.addArticle(article,1);
+ 	$scope.selectArticle= function(article,rayon) {
+ 		if ($scope.listemode=='edit')
+			$scope.addArticle(article,1);
+		else {
+			article.checked=!article.checked;
+			console.log( $filter('FSelected')(rayon.articles).length );
+			console.log( $filter('FChecked')(rayon.articles).length );
+			if ($filter('FSelected')(rayon.articles).length == $filter('FChecked')(rayon.articles).length) rayon.checked=true;
+				else rayon.checked=false;
+		}
 	}
 
 
@@ -98,7 +106,7 @@
 	$scope.newArticle = function(rayon) {
 		if (this.articleFilter) {
 			aKey=getKeyWith(rayon.articles, 'name', this.articleFilter);
-			if (false===aKey) 	rayon.articles.push( {name:this.articleFilter, show:true, quantite:1, info:null} );
+			if (false===aKey) 	rayon.articles.push( {name:this.articleFilter, show:true, quantite:1, info:null, checked:false} );
 				else $scope.selectArticle(rayon.articles[aKey]);
 			this.articleFilter = '';
 		}
@@ -153,7 +161,7 @@
 	$scope.newRayon = function() {
 		if (this.rayonFilter) {
 			rKey=getKeyWith($scope.liste, 'name', this.rayonFilter);
-			if (false===rKey) $scope.liste.push( {name:this.rayonFilter, position:9999, color:0, show:true, articles:[]} );
+			if (false===rKey) $scope.liste.push( {name:this.rayonFilter, position:9999, color:0, checked:false, show:true, articles:[]} );
 				else $scope.addRayon($scope.liste[rKey]);
 			this.rayonFilter = '';
 		}

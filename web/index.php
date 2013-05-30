@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr" ng-app="app" ng-controller="ListeCtrl">
 <head>
     <title>{{currentList.name}} - {{currentList.slug}}</title>
@@ -22,6 +22,7 @@
     <script src="./js/controllers.js"></script>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link type='text/css' rel='stylesheet' href='./toggle-switch.css' />
     <link type='text/css' rel='stylesheet' href='./style.css' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 
@@ -34,113 +35,116 @@
 
             <ul class="nav">
                 <li>
-                    <select  ng-model="listemode" class='span2'>
-                            <option value="edit">&eacute;dition</option>
-                            <option value="check">course</option>
-                        </select>
+
+                    <label class="checkbox toggle well" onclick="">
+                        <input id="view" type="checkbox" ng-model="listemode" ng-true-value="edit" ng-false-value="check" />
+                        <p>
+                            Mode
+                            <span>Edition</span>
+                            <span>Course</span>
+                        </p>
+
+                        <a class="btn btn-primary slide-button"></a>
+                    </label>
+
                 </li>
             </ul>
 
             <ul class="nav pull-right not-in-check">
-                <li>
-                    <a href="" ng-click="organize=true">organisez les rayons</a>
-                </li>
-
-                <li>
-                    <a href="" ng-click="loadmenu=true">ouvrir</a>
-                </li>
-                <li>
-                    <a href="" ng-click="savemenu=true">enregistrer</a>
-                </li>
-
+                <li><a href="" ng-click="organize=true">organisez les rayons</a></li>
+                <li><a href="" ng-click="loadmenu=true">ouvrir</a></li>
+                <li><a href="" ng-click="savemenu=true">enregistrer</a></li>
             </ul>
 
         </div>
     </div>
 
-
     <!--  LISTE -->
     <div  class="container liste">
 
-        <h2 class='span12'>
+        <h2>
             <a href='./{{currentList.slug}}'>{{currentList.name}}</a>
         </h2>
 
-        <div class='row'>
-            <div class='span8'>
-                <div class='alert alert-info' ng-show='query.length'>
-                    <i class="icon-filter"></i>
+        <div class='row not-in-check'>
+            <div class='span9'>
+                <div class='alert alert-info' ng-show='query.length'> <i class="icon-filter"></i>
                     Filtre actif: <strong>"{{query}}"</strong>
-                    ({{(rayonShown|FArticles|FShow|filter:query).length}} r&eacute;sultat(s)
+                    ({{(rayonShown|FArticles|FShow|filter:query).length}} résultat(s)
                     <button class="btn btn-mini pull-right" ng-click="query=''">vider</button>
                 </div>
             </div>
-            <div class='span4'>
-                <form class="navbar-search">
-                    <input ng-model="query"  type="text" class="search-query" placeholder="Filtrer"/>
-                </form>
-            </div>
 
-
+            <form class="navbar-search span3">
+                <input ng-model="query"  type="text" class="search-query " placeholder="Filtrer"/>
+            </form>
 
         </div>
 
+
         <ul class='sortable'>
 
-        <li class='rayon qtt{{(rayon.articles|FSelected).length}}' ng-repeat="rayon in rayonShown" class='span12' data-name='{{rayon.name}}'>
+            <li class='rayon qtt{{(rayon.articles|FSelected).length}}' ng-repeat="rayon in rayonShown" class='span12'  ng-class="{checked:rayon.checked}" data-name='{{rayon.name}}'>
 
-            <div ng-show='filteredArticles.length||query.length==0'>
+                <div ng-show='filteredArticles.length||query.length==0'>
 
-                <h3 class='c{{rayon.color}}'>{{rayon.name}}</h3>
-                <ul class='option-btn'>
-                    <li class="dropdown pull-right">
-                        <a class="dropdown-toggle" title='options'> <i class="icon-cog  icon-white"></i>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li ng-class="{disabled: (rayon.articles | FSelected).length==0}">
-                                <a href='' ng-click="emptyRayonArticles(rayon)">vider ce rayon</a>
-                            </li>
-                            <li ng-class="{disabled: (rayon.articles | FShow).length==0}">
-                                <a href=''  ng-click="removeRayonArticles(rayon)">supprimer tout les articles</a>
-                            </li>
-                            <li>
-                                <a href='' ng-click="removeRayon(rayon)">retirer ce rayon</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                    <h3 class='c{{rayon.color}}'>{{rayon.name}}<span class='checkmark' ng-show='rayon.checked&&listemode=="check"'>✓</span>
+                        <span ng-show='listemode=="check"' class='check-count pull-right'>{{(rayon.articles|FChecked).length}} / {{(rayon.articles|FSelected).length}}</span>
+                    </h3>
+                    <ul class='option-btn not-in-check'>
+                        <li class="dropdown pull-right">
+                            <a class="dropdown-toggle" title='options'> <i class="icon-cog  icon-white"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li ng-class="{disabled: (rayon.articles | FSelected).length==0}">
+                                    <a href='' ng-click="emptyRayonArticles(rayon)">vider ce rayon</a>
+                                </li>
+                                <li ng-class="{disabled: (rayon.articles | FShow).length==0}">
+                                    <a href=''  ng-click="removeRayonArticles(rayon)">supprimer tout les articles</a>
+                                </li>
+                                <li>
+                                    <a href='' ng-click="removeRayon(rayon)">retirer ce rayon</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-                <ul class="row articles-row">
+                    <div class="progress"  ng-show='listemode=="check"'>
+                        <div class="bar bar-success" style="width: {{(rayon.articles|FChecked).length/(rayon.articles|FSelected).length*100}}%;"></div>
+                    </div>
 
-                    <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}'>
-                        <span class="articlename"  ng-click="selectArticle(article)">{{article.name}}</span>
-                        <span class='btn btn-mini less not-in-check' ng-click="addArticle(article,-1)">-</span>
-                        <span class='qtt'>{{article.quantite}}</span>
-                        <span class='btn btn-mini more not-in-check' ng-click="addArticle(article,1)">+</span>
-                        <span class='btn btn-mini info not-in-check' ng-show="article.info==null"  ng-click="addInfoArticle(article)">i</span>
-                        <span class='btn btn-mini delete not-in-check'  ng-click="removeArticle(article)">x</span>
-                        <textarea ng-show="article.info!=null" ng-model="article.info"></textarea>
-                        <span class='btn btn-mini inforemove not-in-check' ng-show="article.info!=null"  ng-click="removeInfoArticle(article)">supprimer info</span>
-                    </li>
+                    <ul class="row articles-row">
 
-                    <p ng-show="!filteredArticles.length" class='span3'>aucun article</p>
+                        <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}' ng-class="{checked:article.checked}">
+                            <span class='checkmark' ng-show='listemode=="check"'  ng-click="selectArticle(article,rayon)">☐<span>✓</span></span>
+                            <span class="articlename"  ng-click="selectArticle(article,rayon)">{{article.name}}</span>
+                            <span class='btn btn-mini less not-in-check' ng-click="addArticle(article,-1)">-</span>
+                            <span class='qtt'>x{{article.quantite}}</span>
+                            <span class='btn btn-mini more not-in-check' ng-click="addArticle(article,1)">+</span>
+                            <span class='btn btn-mini info not-in-check' ng-show="article.info==null"  ng-click="addInfoArticle(article)">i</span>
+                            <span class='btn btn-mini delete not-in-check'  ng-click="removeArticle(article)">x</span>
+                            <textarea ng-show="article.info!=null" ng-model="article.info"></textarea>
+                            <span class='btn btn-mini inforemove not-in-check' ng-show="article.info!=null"  ng-click="removeInfoArticle(article)">supprimer info</span>
+                        </li>
 
-                </ul>
+                        <p ng-show="!filteredArticles.length" class='span3'>aucun article</p>
 
-                <form ng-submit="newArticle(rayon)" class='not-in-check'>
-                    <input type="text" ng-model="articleFilter" name="article" placeholder="ajouter un article" />
-                </form>
+                    </ul>
 
-                <ul ng-show="articleFilter.length">
-                    <li ng-repeat="article in rayon.articles | FNotShow | filter:articleFilter | orderBy:'name'" style='display:inline-block'>
-                        <a href='' ng-click="selectArticle(article)">{{article.name}}</a>
-                        &nbsp;
-                    </li>
-                </ul>
+                    <form ng-submit="newArticle(rayon)" class='not-in-check'>
+                        <input type="text" ng-model="articleFilter" name="article" placeholder="ajouter un article" />
+                    </form>
 
-            </div>
-        </li>
-    </ul>
+                    <ul ng-show="articleFilter.length">
+                        <li ng-repeat="article in rayon.articles | FNotShow | filter:articleFilter | orderBy:'name'" style='display:inline-block'>
+                            <a href='' ng-click="selectArticle(article)">{{article.name}}</a>
+                            &nbsp;
+                        </li>
+                    </ul>
+
+                </div>
+            </li>
+        </ul>
 
         <div class='span12 not-in-check' ng-show='query.length==0'>
 
@@ -160,19 +164,17 @@
     </div>
     <!-- end liste -->
 
-
-
     <div ng-show="loadmenu" class="modal fade in">
         <div class="modal-header">
             <h4>Ouvrir la liste</h4>
         </div>
         <div class="modal-body">
             <ul>
-                <li   ng-class="{current:currentList.slug=='default'}">
+                <li ng-class="{current:currentList.slug=='default'}">
                     <a href='./default' ng-click="load('default')" onClick='return false'>liste par defaut</a>
                 </li>
                 <li   ng-class="{current:currentList.slug=='full'}">
-                    <a href='./full' ng-click="load('full')" onClick='return false'>liste compl&egrave;te</a>
+                    <a href='./full' ng-click="load('full')" onClick='return false'>liste complète</a>
                 </li>
 
                 <li>&nbsp;</li>
@@ -227,7 +229,6 @@
         </div>
     </div>
     <div ng-show="organize" class="modal-backdrop fade in"  ng-click="organize=false"></div>
-
 
     <div ng-show="lightbox!=null" class="modal fade in">
         <div class="modal-header">
