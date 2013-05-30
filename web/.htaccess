@@ -1,0 +1,10 @@
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   #RewriteCond %{REQUEST_URI} !/(css|js|images)/
+   #RewriteCond %{REQUEST_URI} !(humans\.txt|robots\.txt)/
+   RewriteRule ^([a-z|0-9]*)$ index.php?l=$1 [QSA,L]
+</IfModule>
+
+#RewriteRule ^liste([^/]$             index.php?l=$1 [L]

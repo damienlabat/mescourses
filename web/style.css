@@ -1,0 +1,208 @@
+* {
+/*	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;*/
+}
+
+.container {
+	/*background: #eef;
+	margin-bottom: 5px;*/
+	margin-bottom: 45px;
+}
+
+form {
+    margin: 0;
+}
+.article {
+	color: #000;
+	font-size:1em;
+	display: block;
+}
+
+.article.qtt0{
+	color:#888;
+	font-size:.9em;
+}
+
+.less, .more, .article.qtt0 .articlename, .article.qtt1 .articlename {
+	cursor:pointer;
+	visibility:visible;
+}
+
+ul, ol {
+    margin: 0;
+}
+
+li {list-style: none}
+
+textarea {
+	border-color: #FFFFFF #FFFFFF #FFFFFF #CCCCCC;
+    border-radius: 0;
+    border-style: solid solid solid dashed;
+    border-width: 1px;
+    box-shadow: none;
+    font-size: 12px;
+    font-style: italic;
+    margin-left: 12px;
+    overflow: auto;
+    width: 190px;
+    height: 20px;
+    resize: vertical;
+}
+textarea:focus, textarea:hover { border-color: #ccc;}
+
+ul.stock li {display:inline;font-size:0.75em;}
+
+li.current {font-weight: bold}
+
+div.liste>ul.sortable>li {
+	margin-left:0;
+}
+
+
+.rayon > div {
+	border: 1px solid #999999;
+    margin: 10px 0;
+    padding: 0 13px;
+    display:block;
+    position:relative;
+    background: #fff;
+}
+
+.rayon > div > h3 {
+    display: block;
+    color: #fff;
+    font-size: 1.3em;
+    margin: 0 -13px 16px;
+    padding: 0 13px;
+    text-transform: capitalize;
+    cursor:move;
+}
+
+.articles-row {
+	-webkit-column-width:212px;
+	-moz-column-width:212px;
+	column-width:212px;
+	-moz-column-rule: 1px solid #ddd;
+    -webkit-column-rule: 1px solid #ddd;
+    column-rule: 1px solid #ddd;
+	margin-left:0
+}
+
+.article .articlename { display:inline-block; /*width:50%;*/}
+.article.qtt0  .articlename:hover { background: #eee;}
+
+.article.qtt0 span{ visibility:hidden;}
+
+
+.article .qtt, .article:hover span, .article.qtt1:hover .qtt, .article .articlename  {visibility:visible;}
+
+.article.qtt1 .qtt, .article.qtt0 span, .article span {visibility:hidden;}
+
+.article.qtt span.delete, .article:hover span.delete {visibility:hidden;}
+.article.qtt0:hover span.delete {visibility:visible;}
+
+body.check li.article.qtt0,
+body.check li.rayon.qtt0
+ {
+	display:none;
+}
+
+
+/** lightbox **/
+
+.lightbox {
+	position: fixed;
+	height:100%;
+	width:100%;
+	background: rgba(0, 0, 0, 0.5);
+	top:0;
+	left:0;
+}
+
+.lightbox.off { display:none; }
+
+.lightbox>div {
+	margin: 50px auto;
+	min-height:100px;
+	width:400px;
+	background: #fff;
+	border:1px solid #999;
+	box-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+	padding: 0 16px;
+}
+
+
+
+
+/* organize */
+
+
+.organize li {
+    color: #FFFFFF;
+    font-size: 1.25em;
+    border: 1px solid #fff;
+    padding: 4px 11px;
+    margin-top:-1px;
+    text-transform: capitalize;
+    cursor: move;
+}
+
+.organize li.ui-sortable-helper,
+li.ui-sortable-helper .rayon
+ {
+	margin-left:10px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+}
+
+.ui-sortable-placeholder {
+	min-height: 40px;
+}
+
+.option-btn {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+}
+
+
+body.check .not-in-check {
+	display:none !important;
+}
+
+/* colors */
+
+
+
+.color-picker > a {
+	border: 1px solid #FFFFFF;
+    height: 8px;
+    margin: 4px 1px;
+    padding: 0;
+    width: 8px;
+}
+
+.color-picker > a:hover,
+.color-picker > a:focus {
+	height: 14px;
+    margin: 1px -2px;
+    width: 14px;
+}
+
+.color-picker > a.selected,
+.color-picker > a.selected:hover,
+.color-picker > a.selected:focus {
+    visibility: hidden;
+}
+
+
+ .c0,.c0:hover,.c0:focus{background-color:#1f77b4 !important; background-image:none !important;}
+ .c1,.c1:hover,.c1:focus{background-color:#ff7f0e !important; background-image:none !important}
+ .c2,.c2:hover,.c2:focus{background-color:#2ca02c !important; background-image:none !important}
+ .c3,.c3:hover,.c3:focus{background-color:#d62728 !important; background-image:none !important}
+ .c4,.c4:hover,.c4:focus{background-color:#9467bd !important; background-image:none !important}
+ .c5,.c5:hover,.c5:focus{background-color:#8c564b !important; background-image:none !important}
+ .c6,.c6:hover,.c6:focus{background-color:#e377c2 !important; background-image:none !important}
+ .c7,.c7:hover,.c7:focus{background-color:#7f7f7f !important; background-image:none !important}
+ .c8,.c8:hover,.c8:focus{background-color:#bcbd22 !important; background-image:none !important}
+ .c9,.c9:hover,.c9:focus{background-color:#17becf !important; background-image:none !important}
