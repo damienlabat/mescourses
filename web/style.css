@@ -409,10 +409,12 @@ body.check .not-in-check {
 
 .nav .toggle p {
     left: -50px;
+    color: #F7F7F7;
 }
 
 .toggle p span {
     margin-left: 50px;
+    color: #333333;
 }
 
 
