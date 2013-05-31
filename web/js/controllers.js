@@ -68,27 +68,34 @@
 
  	$scope.selectArticle= function(article,rayon) {
  		if ($scope.listemode=='edit')
-			$scope.addArticle(article,1);
+			$scope.addArticle(article,rayon,1);
 		else {
 			article.checked=!article.checked;
-			console.log( $filter('FSelected')(rayon.articles).length );
-			console.log( $filter('FChecked')(rayon.articles).length );
-			if ($filter('FSelected')(rayon.articles).length == $filter('FChecked')(rayon.articles).length) rayon.checked=true;
-				else rayon.checked=false;
-		}
+			$scope.checkRayon(rayon);
+			}
+
 	}
 
 
-	$scope.addArticle= function(article,inc) {
+	$scope.checkRayon= function(rayon,force) {
+		if ($filter('FSelected')(rayon.articles).length == $filter('FChecked')(rayon.articles).length) rayon.checked=true;
+				else rayon.checked=false;
+	}
+
+
+	$scope.addArticle= function(article,rayon,inc) {
 		article.show=true;
+		article.checked=false;
 		if (inc==null) inc=+1;
 		article.quantite=article.quantite+inc;
 		if (article.quantite<0) article.quantite=0;
+		$scope.checkRayon(rayon);
 	}
 
 
 	$scope.addInfoArticle= function(article) {
 		article.info='';
+		article.checked=false;
 	}
 
 

@@ -26,6 +26,7 @@ form {
 	font-size:1em;
 	display: inline-block;
     width:100%;
+    border-radius: 3px;
 
     -webkit-column-break-after: always;
     break-inside: avoid-column;
@@ -35,10 +36,17 @@ form {
     hyphens: auto;
 }
 
-body.check .article.checked {
-    color:#7FBF7F;
-
+.article>* {
+    margin:4px 4px 4px 10px;
     }
+
+body.check .article.checked {
+     color:#7FBF7F;
+    }
+
+body.check .article.checked textarea {
+    display:none;
+}
 
 .checkmark {
     line-height: 8px;
@@ -64,21 +72,35 @@ li.article.checked .checkmark>span {
     visibility: visible;
     }
 
-body.check .rayon.checked {
-    opacity: 0.5;
+body.check .rayon.checked > div > *:not(.checkmark) {
+    opacity:0.25;
 }
 
-.article.qtt0{
+body.check .rayon > div *:not(.checkmark) {
+    transition: all ease 0.5s;
+}
+
+.rayon > div > .checkmark {
+    color: green;
+    font-size: 80px;
+    position: absolute;
+    right: -30px;
+    top: 2px;
+}
+
+.rayon.checked > div > h3 .check-count {
+    margin-right: 20px;
+}
+
+.article a.article-name{
+    color:#000;
+}
+
+.article.qtt0 a.article-name{
 	color:#888;
 }
 
-.less, .more, .article.qtt0 .articlename, .article.qtt1 .articlename {
-	visibility:visible;
-}
 
-.less, .more, .article {
-    cursor:pointer;
-}
 
 ul, ol {
     margin: 0;
@@ -110,6 +132,7 @@ div.liste>ul.sortable>li {
 	margin-left:0;
 }
 
+.rayon {background: #fff}
 
 .rayon > div {
 	border: 1px solid #999999;
@@ -137,12 +160,17 @@ div.liste>ul.sortable>li {
 
 .progress {
     height: 8px;
+    transition: all ease 1s;
+}
+.rayon.checked .progress {
+    height: 0px;
+    opacity:0 !important;
 }
 
 .articles-row {
-	-webkit-column-width:212px;
-	-moz-column-width:212px;
-	column-width:212px;
+	-webkit-column-width:250px;
+	-moz-column-width:250px;
+	column-width:250px;
 	-moz-column-rule: 1px solid #ddd;
     -webkit-column-rule: 1px solid #ddd;
     column-rule: 1px solid #ddd;
@@ -150,24 +178,109 @@ div.liste>ul.sortable>li {
     margin-bottom: 12px;
 }
 
-.article .articlename { display:inline-block; /*width:50%;*/}
-.article.qtt0  .articlename:hover { background: #eee;}
+.article .article-name { display:inline-block; color:/*width:50%;*/}
+/*.article.qtt0  .article-name:hover { background: #eee;}*/
 
-.article.qtt0 span{ visibility:hidden;}
-
-
-.article .qtt, .article:hover span, .article.qtt1:hover .qtt, .article .articlename, .article .checkmark  {visibility:visible;}
-
-.article.qtt1 .qtt, .article.qtt0 span, .article span, body.check .article.qtt1:hover .qtt {visibility:hidden;}
-
-.article.qtt span.delete, .article:hover span.delete {visibility:hidden;}
-.article.qtt0:hover span.delete {visibility:visible;}
-
-body.check li.article.qtt0,
-body.check li.rayon.qtt0
- {
-	display:none;
+.article .article-btn {
+    float:right;
 }
+
+
+
+/*.article .qtt,
+.article:hover span,
+.article.qtt1:hover .qtt,
+.article .article-name,
+.article .checkmark,
+.article.qtt0:hover span.delete*/
+.article .article-btn,
+.article.qtt1:hover .article-btn,
+.article.qtt1 .article-btn .info,
+.article.qtt1 .article-btn .delete,
+.article.qtt1:hover .qtt,
+.article.checked .checkmark span,
+.article:hover .checkmark span
+ {
+    visibility:visible;
+}
+
+/*.article.qtt1 .qtt,
+.article article-btn,
+body.check .article.qtt1:hover .qtt,
+.article.qtt span.delete,
+.article:hover span.delete,
+.article.qtt0 .article-btn,
+body.check li.article.qtt0,
+body.check li.rayon.qtt0,
+body.edit .checkmark */
+
+.article.qtt0 .article-btn,
+.article.qtt1 .article-btn,
+.article.qtt0 .qtt,
+.article.qtt1 .qtt,
+.article .checkmark span
+{
+    visibility:hidden;
+}
+
+body.edit .article .checkmark,
+body.check .rayon.qtt0,
+body.check .article.qtt0,
+body.check .article-btn, {
+    display:none;
+}
+
+
+.article:hover, .article:focus {
+    background:#eee;
+}
+
+
+
+
+/* main progress */
+
+.main-progress {
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+    background: #fff;
+}
+
+.main-progress h2 {
+    position: absolute;
+    bottom: 30px;
+    color: #dff1df ;
+    margin-left: 10px;
+    -moz-transition: left 0.6s ease;
+    -webkit-transition: left 0.6s ease;
+    transition: left 0.6s ease;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
+    }
+
+.main-progress h2.left {
+    bottom: auto;
+    color: #FFFFFF;
+    margin-right: 10px;
+    text-align: right;
+    top: 0;
+    -moz-transition: right 0.6s ease;
+    -webkit-transition: right 0.6s ease;
+    transition: right 0.6s ease;
+    }
+
+.main-progress .bar{
+    background: #dff1df ;
+    height: 100%;
+    -moz-transition: width  0.6s ease;
+    -webkit-transition: width  0.6s ease;
+    transition: width  0.6s ease;
+    box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
+    }
+
 
 
 /** lightbox **/

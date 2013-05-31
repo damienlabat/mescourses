@@ -31,7 +31,7 @@
     <div class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="navbar-inner">
 
-            <a class="brand" href="#" style='margin-left:0'>{{currentList.name}}</a>
+            <!--a class="brand" href="#" style='margin-left:0'>{{currentList.name}}</a-->
 
             <ul class="nav">
                 <li>
@@ -57,6 +57,12 @@
             </ul>
 
         </div>
+    </div>
+
+    <div class='main-progress' ng-show='(liste|FArticles|FSelected).length>0&&listemode=="check"'>
+        <div class="bar" style="width: {{ppc=(liste|FArticles|FChecked).length/(liste|FArticles|FSelected).length*100}}%;"></div>
+        <h2  ng-show='(liste|FArticles|FChecked).length>0' style="left:{{ppc}}%">{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
+        <h2  ng-show='(liste|FArticles|FChecked).length>0' style="right:{{100-ppc}}%" class='left'>{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
     </div>
 
     <!--  LISTE -->
@@ -88,9 +94,10 @@
 
                 <div ng-show='filteredArticles.length||query.length==0'>
 
-                    <h3 class='c{{rayon.color}}'>{{rayon.name}}<span class='checkmark' ng-show='rayon.checked&&listemode=="check"'>✓</span>
+                    <h3 class='c{{rayon.color}}'>{{rayon.name}}
                         <span ng-show='listemode=="check"' class='check-count pull-right'>{{(rayon.articles|FChecked).length}} / {{(rayon.articles|FSelected).length}}</span>
                     </h3>
+                    <span class='checkmark' ng-show='rayon.checked&&listemode=="check"'>✓</span>
                     <ul class='option-btn not-in-check'>
                         <li class="dropdown pull-right">
                             <a class="dropdown-toggle" title='options'> <i class="icon-cog  icon-white"></i>
@@ -116,13 +123,15 @@
                     <ul class="row articles-row">
 
                         <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}' ng-class="{checked:article.checked}">
-                            <span class='checkmark' ng-show='listemode=="check"'  ng-click="selectArticle(article,rayon)">☐<span>✓</span></span>
-                            <span class="articlename"  ng-click="selectArticle(article,rayon)">{{article.name}}</span>
-                            <span class='btn btn-mini less not-in-check' ng-click="addArticle(article,-1)">-</span>
-                            <span class='qtt'>x{{article.quantite}}</span>
-                            <span class='btn btn-mini more not-in-check' ng-click="addArticle(article,1)">+</span>
-                            <span class='btn btn-mini info not-in-check' ng-show="article.info==null"  ng-click="addInfoArticle(article)">i</span>
-                            <span class='btn btn-mini delete not-in-check'  ng-click="removeArticle(article)">x</span>
+                            <a href='' class='checkmark' ng-click="selectArticle(article,rayon)">☐<span>✓</span></>
+                            <a href='' class="article-name"  ng-click="selectArticle(article,rayon)">{{article.name}}<span class='qtt'> x{{article.quantite}}</span></a>
+                            <span class='article-btn'>
+                                <a href='' class='less btn btn-mini' ng-click="addArticle(article,rayon,-1)">-</a>
+
+                                <a href='' class='more btn btn-mini' ng-click="addArticle(article,rayon,1)">+</a>
+                                <a href='' class='info btn btn-mini btn-primary' ng-show="article.info==null"  ng-click="addInfoArticle(article)">i</a>
+                                <a href='' class='delete btn btn-mini btn-danger'  ng-click="removeArticle(article)">x</a>
+                            </span>
                             <textarea ng-show="article.info!=null" ng-model="article.info"></textarea>
                             <span class='btn btn-mini inforemove not-in-check' ng-show="article.info!=null"  ng-click="removeInfoArticle(article)">supprimer info</span>
                         </li>
@@ -145,6 +154,8 @@
                 </div>
             </li>
         </ul>
+
+        <div ng-show="!(liste|FArticles|FSelected).length&&listemode=='check'" class='alert alert-warning'>aucun article selectionné</div>
 
         <div class='span12 not-in-check' ng-show='query.length==0'>
 
