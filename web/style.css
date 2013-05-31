@@ -21,6 +21,22 @@ form {
     height: 30px;
 }
 
+
+.nav-progress .progress{
+    display: inline-block;
+    margin-bottom: 0;
+    margin-top: 15px;
+    width: 80%;
+}
+
+.nav-progress h4{
+    color: #F7F7F7;
+    display: inline-block;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+
 .article {
 	color: #000;
 	font-size:1em;
@@ -36,7 +52,7 @@ form {
     hyphens: auto;
 }
 
-.article>* {
+.article>*:not(textarea) {
     margin:4px 4px 4px 10px;
     }
 
@@ -74,6 +90,10 @@ li.article.checked .checkmark>span {
 
 body.check .rayon.checked > div > *:not(.checkmark) {
     opacity:0.25;
+}
+
+body.check .rayon.checked > div > h3 {
+    margin-bottom:0;
 }
 
 body.check .rayon > div *:not(.checkmark) {
@@ -116,9 +136,9 @@ textarea {
     box-shadow: none;
     font-size: 12px;
     font-style: italic;
-    margin-left: 12px;
+    margin-left: 40px;
     overflow: auto;
-    width: 190px;
+    width: 216px;
     height: 20px;
     resize: vertical;
 }
@@ -164,6 +184,7 @@ div.liste>ul.sortable>li {
 }
 .rayon.checked .progress {
     height: 0px;
+    margin-bottom: 15px;
     opacity:0 !important;
 }
 
@@ -187,33 +208,19 @@ div.liste>ul.sortable>li {
 
 
 
-/*.article .qtt,
-.article:hover span,
-.article.qtt1:hover .qtt,
-.article .article-name,
-.article .checkmark,
-.article.qtt0:hover span.delete*/
+
 .article .article-btn,
 .article.qtt1:hover .article-btn,
 .article.qtt1 .article-btn .info,
 .article.qtt1 .article-btn .delete,
-.article.qtt1:hover .qtt,
 .article.checked .checkmark span,
 .article:hover .checkmark span
  {
     visibility:visible;
 }
 
-/*.article.qtt1 .qtt,
-.article article-btn,
-body.check .article.qtt1:hover .qtt,
-.article.qtt span.delete,
-.article:hover span.delete,
-.article.qtt0 .article-btn,
-body.check li.article.qtt0,
-body.check li.rayon.qtt0,
-body.edit .checkmark */
 
+body.edit .article .qtt,
 .article.qtt0 .article-btn,
 .article.qtt1 .article-btn,
 .article.qtt0 .qtt,
@@ -226,10 +233,9 @@ body.edit .checkmark */
 body.edit .article .checkmark,
 body.check .rayon.qtt0,
 body.check .article.qtt0,
-body.check .article-btn, {
+body.check .article-btn {
     display:none;
 }
-
 
 .article:hover, .article:focus {
     background:#eee;
@@ -407,4 +413,17 @@ body.check .not-in-check {
 
 .toggle p span {
     margin-left: 50px;
+}
+
+
+
+.btn-mini {
+    border-radius: 3px 3px 3px 3px;
+    display: inline-block;
+    font-size: 11.5px;
+    font-weight: bold;
+    height: 13px;
+    line-height: 13px;
+    padding: 0;
+    width: 14px;
 }

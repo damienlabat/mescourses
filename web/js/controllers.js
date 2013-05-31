@@ -66,13 +66,14 @@
 	 	return liste;
 	}
 
- 	$scope.selectArticle= function(article,rayon) {
+ 	$scope.selectArticle= function(article,rayon,$event) {
  		if ($scope.listemode=='edit')
-			$scope.addArticle(article,rayon,1);
+			$scope.addArticle(article,rayon,1,$event);
 		else {
 			article.checked=!article.checked;
 			$scope.checkRayon(rayon);
 			}
+		$event.stopPropagation();
 
 	}
 
@@ -83,31 +84,33 @@
 	}
 
 
-	$scope.addArticle= function(article,rayon,inc) {
+	$scope.addArticle= function(article,rayon,inc,$event) {
 		article.show=true;
 		article.checked=false;
 		if (inc==null) inc=+1;
 		article.quantite=article.quantite+inc;
 		if (article.quantite<0) article.quantite=0;
 		$scope.checkRayon(rayon);
+		$event.stopPropagation();
 	}
 
 
-	$scope.addInfoArticle= function(article) {
+	$scope.addInfoArticle= function(article,$event) {
 		article.info='';
 		article.checked=false;
+		$event.stopPropagation();
 	}
 
 
-	$scope.removeArticle= function(article) {
+	$scope.removeArticle= function(article,$event) {
 		article.show=false;
+		$event.stopPropagation();
 	};
 
 
-
-	$scope.removeInfoArticle= function(article) {
-		article.info=null;
-	};
+	$scope.checkInfo= function(article) {
+		if (article.info=='') article.info=null;
+	}
 
 
 	$scope.newArticle = function(rayon) {

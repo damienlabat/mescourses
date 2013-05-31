@@ -50,6 +50,15 @@
                 </li>
             </ul>
 
+            <div class='nav-progress' ng-show='listemode=="check"'>
+                <div class="progress">
+                    <div class="bar" style="width: {{ppc=(liste|FArticles|FChecked).length/(liste|FArticles|FSelected).length*100}}%;"></div>
+                </div>
+                <h4>{{ppc|number:0}} %</h4>
+            </div>
+
+
+
             <ul class="nav pull-right not-in-check">
                 <li><a href="" ng-click="organize=true">organisez les rayons</a></li>
                 <li><a href="" ng-click="loadmenu=true">ouvrir</a></li>
@@ -59,11 +68,11 @@
         </div>
     </div>
 
-    <div class='main-progress' ng-show='(liste|FArticles|FSelected).length>0&&listemode=="check"'>
+    <!--div class='main-progress' ng-show='(liste|FArticles|FSelected).length>0&&listemode=="check"'>
         <div class="bar" style="width: {{ppc=(liste|FArticles|FChecked).length/(liste|FArticles|FSelected).length*100}}%;"></div>
         <h2  ng-show='(liste|FArticles|FChecked).length>0' style="left:{{ppc}}%">{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
         <h2  ng-show='(liste|FArticles|FChecked).length>0' style="right:{{100-ppc}}%" class='left'>{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
-    </div>
+    </div-->
 
     <!--  LISTE -->
     <div  class="container liste">
@@ -122,18 +131,17 @@
 
                     <ul class="row articles-row">
 
-                        <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}' ng-class="{checked:article.checked}">
-                            <a href='' class='checkmark' ng-click="selectArticle(article,rayon)">☐<span>✓</span></>
-                            <a href='' class="article-name"  ng-click="selectArticle(article,rayon)">{{article.name}}<span class='qtt'> x{{article.quantite}}</span></a>
+                        <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}' ng-class="{checked:article.checked}"  ng-click="selectArticle(article,rayon,$event)">
+                            <a href='' class='checkmark'>☐<span>✓</span></>
+                            <a href='' class="article-name">{{article.name}}<span class='qtt'> x{{article.quantite}}</span></a>
                             <span class='article-btn'>
-                                <a href='' class='less btn btn-mini' ng-click="addArticle(article,rayon,-1)">-</a>
-
-                                <a href='' class='more btn btn-mini' ng-click="addArticle(article,rayon,1)">+</a>
-                                <a href='' class='info btn btn-mini btn-primary' ng-show="article.info==null"  ng-click="addInfoArticle(article)">i</a>
-                                <a href='' class='delete btn btn-mini btn-danger'  ng-click="removeArticle(article)">x</a>
+                                <a href='' class='less btn btn-mini' ng-click="addArticle(article,rayon,-1,$event)">-</a>
+                                <span> {{article.quantite}} </span>
+                                <a href='' class='more btn btn-mini' ng-click="addArticle(article,rayon,1,$event)">+</a>
+                                <a href='' class='info btn btn-mini btn-primary' ng-show="article.info==null"  ng-click="addInfoArticle(article,$event)">i</a>
+                                <a href='' class='delete btn btn-mini btn-danger'  ng-click="removeArticle(article,$event)">x</a>
                             </span>
-                            <textarea ng-show="article.info!=null" ng-model="article.info"></textarea>
-                            <span class='btn btn-mini inforemove not-in-check' ng-show="article.info!=null"  ng-click="removeInfoArticle(article)">supprimer info</span>
+                            <textarea ng-show="article.info!=null" ng-model="article.info" ng-click='$event.stopPropagation()'  ng-change="checkInfo(article)"></textarea>
                         </li>
 
                         <p ng-show="!filteredArticles.length" class='span3'>aucun article</p>
