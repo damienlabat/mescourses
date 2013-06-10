@@ -4,16 +4,14 @@
 	box-sizing: border-box;*/
 }
 
-.container {
-	/*background: #eef;
-	margin-bottom: 5px;*/
-	margin-bottom: 45px;
-}
-
 form {
     margin: 0;
 }
 
+
+.navbar-fixed-bottom {
+    position: fixed;
+}
 
 .navbar-search input {
     width: 100%;
@@ -21,20 +19,109 @@ form {
     height: 30px;
 }
 
-
-.nav-progress .progress{
-    display: inline-block;
-    margin-bottom: 0;
-    margin-top: 15px;
-    width: 80%;
+.navbar a>i {
+    font-size:16px;
 }
 
-.nav-progress h4{
-    color: #F7F7F7;
-    display: inline-block;
-    font-size: 14px;
-    margin-left: 8px;
+.icon-white {
+    color:#fff;
 }
+
+#main-navbar>.navbar-inner {
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    display: table;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+#main-navbar .nav-left , #main-navbar .nav-right ,#main-navbar .nav-center {
+    display: table-cell;
+    float: none;
+}
+
+#main-navbar .progress {
+    margin-bottom: -1px;
+}
+
+.nav-left,
+.nav-right {
+    width:200px;
+}
+
+.nav-right .nav {
+    margin-right:0;
+}
+
+.nav-right .pct {
+    color: #EEEEEE;
+    display: block;
+    font-size: 1.5em;
+    text-align: center;
+    position: relative;
+    top: -10px;
+}
+
+.nav-center {
+    text-align: center;
+}
+
+#main-navbar .icons-menu a span {
+    padding-left: 5px;
+    -webkit-transition: opacity ease 0.25s;
+    transition: opacity ease 0.25s;
+}
+
+#main-navbar .icons-menu a span {
+    opacity: 0;
+    }
+
+#main-navbar .icons-menu a:hover span,
+#main-navbar .icons-menu a:focus span{
+   opacity: 1;
+    }
+
+#main-navbar .icons-menu a {
+    width: 0px;
+    overflow: hidden;
+    -webkit-transition: width ease 0.5s;
+    transition: width ease 0.5s;
+}
+
+
+#main-navbar .icons-menu a:hover,
+#main-navbar .icons-menu a:focus {
+    width:80px;
+}
+
+#main-navbar .title,
+#main-navbar .nav-right h4 {
+    color: #777777;
+    font-size: 1.2em;
+    position: relative;
+    text-align: center;
+    top: -11px;
+    -webkit-hyphens: auto;  -moz-hyphens: auto;  -ms-hyphens: auto;  -o-hyphens: auto;
+    hyphens: auto;
+}
+
+body.check #main-navbar .title {
+    top:40px;
+}
+
+#main-navbar .title {
+    -webkit-transition: top ease 0.5s;
+    transition: top ease 0.5s;
+    display: block;
+    height: 20px;
+    overflow: hidden;
+    table-layout: fixed;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+
 
 
 .article {
@@ -69,6 +156,10 @@ body.check .article.checked textarea {
     color: #7D7D7D;
     }
 
+.checkmark:hover {
+    text-decoration: none;
+}
+
 .checkmark>span {
     color: #000000;
     font-size: 20px;
@@ -97,7 +188,9 @@ body.check .rayon.checked > div > h3 {
 }
 
 body.check .rayon > div *:not(.checkmark) {
-    transition: all ease 0.5s;
+    -webkit-transition: font-size ease 0.6s, width 0.6s ease 0s;
+    transition: font-size ease 0.6s, width 0.6s ease 0s;
+
 }
 
 .rayon > div > .checkmark {
@@ -180,6 +273,7 @@ div.liste>ul.sortable>li {
 
 .progress {
     height: 8px;
+    -webkit-transition: all ease 1s;
     transition: all ease 1s;
 }
 .rayon.checked .progress {
@@ -202,7 +296,9 @@ div.liste>ul.sortable>li {
 .article .article-name { display:inline-block; color:/*width:50%;*/}
 /*.article.qtt0  .article-name:hover { background: #eee;}*/
 
-.article .article-btn {
+.article .article-btn,
+.article .delete
+ {
     float:right;
 }
 
@@ -211,21 +307,20 @@ div.liste>ul.sortable>li {
 
 .article .article-btn,
 .article.qtt1:hover .article-btn,
-.article.qtt1 .article-btn .info,
 .article.qtt1 .article-btn .delete,
 .article.checked .checkmark span,
-.article:hover .checkmark span
+.article:hover .checkmark span,
+.article:hover .delete
  {
     visibility:visible;
 }
 
 
-body.edit .article .qtt,
 .article.qtt0 .article-btn,
-.article.qtt1 .article-btn,
 .article.qtt0 .qtt,
 .article.qtt1 .qtt,
-.article .checkmark span
+.article .checkmark span,
+.article .delete
 {
     visibility:hidden;
 }
@@ -233,7 +328,7 @@ body.edit .article .qtt,
 body.edit .article .checkmark,
 body.check .rayon.qtt0,
 body.check .article.qtt0,
-body.check .article-btn {
+body.check .article-btn{
     display:none;
 }
 
@@ -241,7 +336,8 @@ body.check .article-btn {
     background:#eee;
 }
 
-
+body.edit .article .article-name { text-decoration:underline;}
+body.edit .article.qtt0 .article-name { text-decoration:none;}
 
 
 /* main progress */
@@ -261,7 +357,6 @@ body.check .article-btn {
     bottom: 30px;
     color: #dff1df ;
     margin-left: 10px;
-    -moz-transition: left 0.6s ease;
     -webkit-transition: left 0.6s ease;
     transition: left 0.6s ease;
     text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.1);
@@ -273,7 +368,6 @@ body.check .article-btn {
     margin-right: 10px;
     text-align: right;
     top: 0;
-    -moz-transition: right 0.6s ease;
     -webkit-transition: right 0.6s ease;
     transition: right 0.6s ease;
     }
@@ -281,11 +375,13 @@ body.check .article-btn {
 .main-progress .bar{
     background: #dff1df ;
     height: 100%;
-    -moz-transition: width  0.6s ease;
-    -webkit-transition: width  0.6s ease;
-    transition: width  0.6s ease;
     box-shadow: 2px 0px 1px rgba(0, 0, 0, 0.1);
     }
+
+.progress .bar{
+    -webkit-transition: width  0.6s ease;
+    transition: width  0.6s ease;
+}
 
 
 
@@ -391,10 +487,10 @@ body.check .not-in-check {
  /* On/Off FlipSwitch */
 
 .nav label.toggle {
-    width: 200px;
-    margin-bottom: 0;
+    width: 130px;
+    margin-bottom: 4px;
     margin-top: 8px;
-    margin-left: 75px;
+    margin-left: 30px;
     height: 24px;
 }
 
@@ -422,7 +518,6 @@ body.check .not-in-check {
 .btn-mini {
     border-radius: 3px 3px 3px 3px;
     display: inline-block;
-    font-size: 11.5px;
     font-weight: bold;
     height: 13px;
     line-height: 13px;

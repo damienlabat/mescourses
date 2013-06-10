@@ -67,9 +67,13 @@
 	}
 
  	$scope.selectArticle= function(article,rayon,$event) {
- 		if ($scope.listemode=='edit')
-			$scope.addArticle(article,rayon,1,$event);
+
+ 		if ($scope.listemode=='edit') {
+			if (article.quantite==0)
+				$scope.addArticle(article,rayon,1,$event);
+		}
 		else {
+
 			article.checked=!article.checked;
 			$scope.checkRayon(rayon);
 			}
@@ -104,6 +108,13 @@
 
 	$scope.removeArticle= function(article,$event) {
 		article.show=false;
+		$event.stopPropagation();
+	};
+
+	$scope.clearArticle= function(article,$event) {
+		article.quantite=0;
+		article.info=null;
+		article.checked=false;
 		$event.stopPropagation();
 	};
 

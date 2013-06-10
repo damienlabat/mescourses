@@ -6,14 +6,12 @@
     <script src="http://code.angularjs.org/1.1.2/angular-sanitize.js"></script>
     <script>var mescourses={slug:"<?php
 
-    if (!isset($_GET['l']))
-        $_GET['l']='default';
-    echo $_GET['l'];
+    echo (isset($_GET['l']) ? $_GET['l'] : 'default');
 
         ?>"};</script>
 
     <script src="https://raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-0.3.0.min.js"></script>
-    <script src="https://raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.3.0.min.js"></script>
+    <!--script src="https://raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.3.0.min.js"></script-->
 
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -22,24 +20,24 @@
     <script src="./js/controllers.js"></script>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
     <link type='text/css' rel='stylesheet' href='./toggle-switch.css' />
     <link type='text/css' rel='stylesheet' href='./style.css' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 
 <body class='{{listemode}}'>
 
-    <div class="navbar navbar-inverse navbar-fixed-bottom">
+    <div id='main-navbar' class="navbar navbar-inverse navbar-fixed-bottom">
         <div class="navbar-inner">
 
-            <!--a class="brand" href="#" style='margin-left:0'>{{currentList.name}}</a-->
 
-            <ul class="nav">
+
+            <ul class="nav nav-left">
                 <li>
 
                     <label class="checkbox toggle well" onclick="">
                         <input id="view" type="checkbox" ng-model="listemode" ng-true-value="edit" ng-false-value="check" />
                         <p>
-                            Mode
                             <span>Edition</span>
                             <span>Course</span>
                         </p>
@@ -50,43 +48,42 @@
                 </li>
             </ul>
 
-            <div class='nav-progress' ng-show='listemode=="check"'>
-                <div class="progress">
+            <div class="nav-center" >
+                <div class="progress" ng-show='listemode=="check"'>
                     <div class="bar" style="width: {{ppc=(liste|FArticles|FChecked).length/(liste|FArticles|FSelected).length*100}}%;"></div>
                 </div>
-                <h4>{{ppc|number:0}} %</h4>
+                <a  class="title" href='./{{currentList.slug}}'>{{currentList.name}}</a>
             </div>
 
 
 
-            <ul class="nav pull-right not-in-check">
-                <li><a href="" ng-click="organize=true">organisez les rayons</a></li>
-                <li><a href="" ng-click="loadmenu=true">ouvrir</a></li>
-                <li><a href="" ng-click="savemenu=true">enregistrer</a></li>
-            </ul>
+
+            <div class="nav-right">
+                <ul class="nav icons-menu not-in-check">
+                    <li><a href="" ng-click="organize=true" title='organiser les rayons'><i class="icon-magic"></i><span>organiser</span></a></li>
+                    <li><a href="" ng-click="loadmenu=true" title='ouvrir'><i class="icon-file-alt"></i><span>ouvrir</span></a></li>
+                    <li><a href="" ng-click="savemenu=true" title='enregistrer'><i class="icon-save"></i><span>enregistrer</span></a></li>
+                </ul>
+                <span class='pct' ng-show='listemode=="check"'>{{ppc|number:0}} %</span>
+            </div>
 
         </div>
     </div>
 
-    <!--div class='main-progress' ng-show='(liste|FArticles|FSelected).length>0&&listemode=="check"'>
-        <div class="bar" style="width: {{ppc=(liste|FArticles|FChecked).length/(liste|FArticles|FSelected).length*100}}%;"></div>
-        <h2  ng-show='(liste|FArticles|FChecked).length>0' style="left:{{ppc}}%">{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
-        <h2  ng-show='(liste|FArticles|FChecked).length>0' style="right:{{100-ppc}}%" class='left'>{{(liste|FArticles|FChecked).length}}/{{(liste|FArticles|FSelected).length}}</h2>
-    </div-->
 
     <!--  LISTE -->
     <div  class="container liste">
 
-        <h2>
+        <!--h2>
             <a href='./{{currentList.slug}}'>{{currentList.name}}</a>
-        </h2>
+        </h2-->
 
-        <div class='row not-in-check'>
+        <div class='row'>
             <div class='span9'>
                 <div class='alert alert-info' ng-show='query.length'> <i class="icon-filter"></i>
                     Filtre actif: <strong>"{{query}}"</strong>
-                    ({{(rayonShown|FArticles|FShow|filter:query).length}} résultat(s)
-                    <button class="btn btn-mini pull-right" ng-click="query=''">vider</button>
+                    {{(rayonShown|FArticles|FShow|filter:query).length}} résultat(s)
+                    <button class="btn btn-small pull-right" ng-click="query=''">vider</button>
                 </div>
             </div>
 
@@ -132,15 +129,16 @@
                     <ul class="row articles-row">
 
                         <li ng-repeat="article in filteredArticles = (rayon.articles | FShow |  filter:query  | orderBy:'name')" class='article qtt{{article.quantite}}' ng-class="{checked:article.checked}"  ng-click="selectArticle(article,rayon,$event)">
-                            <a href='' class='checkmark'>☐<span>✓</span></>
-                            <a href='' class="article-name">{{article.name}}<span class='qtt'> x{{article.quantite}}</span></a>
-                            <span class='article-btn'>
-                                <a href='' class='less btn btn-mini' ng-click="addArticle(article,rayon,-1,$event)">-</a>
+                            <a href='' class='checkmark'>☐<span>✓</span></a>
+                            <a href='' class="article-name" title='+1'>{{article.name}}<span class='qtt'> x{{article.quantite}}</span></a>
+                            <span class='article-btn'  ng-show="article.quantite>0">
+                                <a href='' class='less btn btn-mini' ng-click="addArticle(article,rayon,-1,$event)" title='-1'>-</a>
                                 <span> {{article.quantite}} </span>
-                                <a href='' class='more btn btn-mini' ng-click="addArticle(article,rayon,1,$event)">+</a>
-                                <a href='' class='info btn btn-mini btn-primary' ng-show="article.info==null"  ng-click="addInfoArticle(article,$event)">i</a>
-                                <a href='' class='delete btn btn-mini btn-danger'  ng-click="removeArticle(article,$event)">x</a>
+                                <a href='' class='more btn btn-mini' ng-click="addArticle(article,rayon,1,$event)" title='+1'>+</a>
+                                <a href='' class='info btn btn-mini' ng-show="article.info==null"  ng-click="addInfoArticle(article,$event)" title='ajouter un commentaire'>i</a>
+                                <a href='' class='clear btn btn-mini'  ng-click="clearArticle(article,$event)" title='vider'>x</a>
                             </span>
+                            <a href='' class='delete btn btn-mini btn-danger'  ng-show="article.quantite==0"  ng-click="removeArticle(article,$event)" title='supprimer'>x</a>
                             <textarea ng-show="article.info!=null" ng-model="article.info" ng-click='$event.stopPropagation()'  ng-change="checkInfo(article)"></textarea>
                         </li>
 
