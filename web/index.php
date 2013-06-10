@@ -163,7 +163,7 @@
 
         <div ng-show="!(liste|FArticles|FSelected).length&&listemode=='check'" class='alert alert-warning'>aucun article selectionné</div>
 
-        <div class='span12 not-in-check' ng-show='query.length==0'>
+        <div class='span12 not-in-check new-rayon' ng-show='query.length==0'>
 
             <h1>Ajouter un rayon</h1>
             <form ng-submit="newRayon()">

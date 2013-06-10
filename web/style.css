@@ -4,8 +4,50 @@
 	box-sizing: border-box;*/
 }
 
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #0f3b16;
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #0f3b16;
+    font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #0f3b16;
+    font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #0f3b16;
+    font-style: italic;
+}
+
 form {
     margin: 0;
+}
+
+body {
+    background: url("bg.png") no-repeat fixed 0 0 / cover #3b5208;
+    color: #000;
+}
+
+body.check {
+    }
+
+.container {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+.rayon,
+.navbar-search input,
+.new-rayon input,
+.alert{
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.new-rayon h1
+{
+   text-shadow: 0 0 25px #fff,2px 2px 1px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -97,7 +139,6 @@ form {
 #main-navbar .title,
 #main-navbar .nav-right h4 {
     color: #777777;
-    font-size: 1.2em;
     position: relative;
     text-align: center;
     top: -11px;
@@ -180,7 +221,15 @@ li.article.checked .checkmark>span {
     }
 
 body.check .rayon.checked > div > *:not(.checkmark) {
-    opacity:0.25;
+    font-style: italic;
+}
+
+.rayon.checked {
+    background: rgba(255,255,255,0.25);
+}
+
+.rayon.checked > div {
+    background: none;
 }
 
 body.check .rayon.checked > div > h3 {
@@ -248,7 +297,7 @@ div.liste>ul.sortable>li {
 .rayon {background: #fff}
 
 .rayon > div {
-	border: 1px solid #999999;
+	border: 1px solid #666;
     margin: 10px 0;
     padding: 0 13px;
     display:block;
