@@ -7,9 +7,11 @@
  	$scope.currentList={'name':'chargement...', 'slug': 'mes courses'};
  	$scope.listemode='edit';
  	$scope.lightbox=null;
+ 	$scope.status=null;
 
  	$scope.organize=false;
  	$scope.savemenu=false;
+ 	$scope.loadmenu=false;
 
 
 
@@ -193,20 +195,23 @@
 
 
 	$scope.save = function() {
-
+		$scope.status='enregistrement en cours ...';
 		$http.put('./api/liste/',{liste:$scope.toCompressed(), name:this.listname})
 		.success(function(data) {
 			$scope.currentList=data;
 			$window.history.pushState(null, null, "./"+$scope.currentList.slug);
 			$scope.loaduserlistes();
 			$scope.savemenu=false;
+			$scope.status=null;
+			$scope.savemenu=false;
 		})
-		.error(function(data) { $scope.lightbox={title:"erreur",content:data.error}; });
+		.error(function(data) { $scope.lightbox={title:"erreur",content:data.error};$scope.status=null; });
 
 	};
 
 
 	$scope.load = function(filename) {
+		$scope.status='chargement en cours ...';
 		if (null==filename) filename='default';
 		$http.get('./api/liste/'+filename+'.json').success(function(data) {
 			$scope.currentList=data.liste;
@@ -214,8 +219,10 @@
 			$scope.page='liste';
 			$scope.liste=$scope.fromCompressed(data.content);
 	 	 	$scope.combineData();
-
-		}).error(function(data) { $scope.lightbox={title:"erreur",content:data.error}; });
+	 	 	$scope.status=null;
+	 	 	$scope.loadmenu=false;
+		})
+		.error(function(data) { $scope.lightbox={title:"erreur",content:data.error};$scope.status=null; });
 	return false;
 	};
 

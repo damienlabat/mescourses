@@ -23,6 +23,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
     <link type='text/css' rel='stylesheet' href='./toggle-switch.css' />
     <link type='text/css' rel='stylesheet' href='./style.css' />
+    <link type="text/css" rel="stylesheet" href="./print.css"  media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 
 <body class='{{listemode}}'>
@@ -35,7 +36,7 @@
             <ul class="nav nav-left">
                 <li>
 
-                    <label class="checkbox toggle well" onclick="">
+                    <label class="checkbox toggle well" onclick="" ng-show="(liste|FArticles|FSelected).length">
                         <input id="view" type="checkbox" ng-model="listemode" ng-true-value="edit" ng-false-value="check" />
                         <p>
                             <span>Edition</span>
@@ -186,23 +187,38 @@
             <h4>Ouvrir la liste</h4>
         </div>
         <div class="modal-body">
-            <ul>
-                <li ng-class="{current:currentList.slug=='default'}">
-                    <a href='./default' ng-click="load('default')" onClick='return false'>liste par defaut</a>
+
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Titre</th>
+                    <th>Url</th>
+                    <th>Date</th>
+                </tr>
+
+                <tr ng-repeat="liste in userlistes| orderBy:'created_at':true"  ng-class='{current:currentList.slug==liste.slug}'>
+                    <td class='liste-title'>
+                        <a href='./{{liste.slug}}' ng-click="load(liste.slug)" onClick='return false'><i class="icon-file"></i> {{liste.name}}</a>
+                    </td>
+                    <td class='liste-slug'>
+                        <a href='./{{liste.slug}}' ng-click="load(liste.slug)" onClick='return false'>./{{liste.slug}}</a>
+                    </td>
+                    <td class='liste-date'>
+                        <a href='./{{liste.slug}}' ng-click="load(liste.slug)" onClick='return false'>{{liste.created_at|customDate}}</a>
+                    </td>
+
+                </tr>
+            </table>
+
+
+             <ul>
+                <li ng-class="{current:currentList.slug=='default'}"  class='liste-title'>
+                    <a href='./default' ng-click="load('default')" onClick='return false'><i class="icon-file"></i> liste par défaut</a>
                 </li>
-                <li   ng-class="{current:currentList.slug=='full'}">
-                    <a href='./full' ng-click="load('full')" onClick='return false'>liste complète</a>
+                <li   ng-class="{current:currentList.slug=='full'}"  class='liste-title'>
+                    <a href='./full' ng-click="load('full')" onClick='return false'><i class="icon-file"></i> liste complète</a>
                 </li>
 
-                <li>&nbsp;</li>
-
-                <li ng-repeat="liste in userlistes| orderBy:'created_at':true"  ng-class='{current:currentList.slug==liste.slug}'>
-                    <a href='./{{liste.slug}}' ng-click="load(liste.slug)" onClick='return false'>
-                        <span class='date'>{{liste.created_at|customDate}}</span>
-                        - {{liste.name}} -
-                        <span class='slug'>{{liste.slug}}</span>
-                    </a>
-                </li>
             </ul>
         </div>
         <div class="modal-footer">
@@ -212,7 +228,7 @@
     <div ng-show="loadmenu" class="modal-backdrop fade in"  ng-click="loadmenu=false"></div>
     <!-- end container open -->
 
-    <div ng-show="savemenu" class="modal fade in">
+    <div ng-show="savemenu" class="save-menu modal fade in">
         <div class="modal-header">
             <h4>Enregister la liste</h4>
         </div>
@@ -257,6 +273,10 @@
         </div>
     </div>
     <div ng-show="lightbox!=null" class="modal-backdrop fade in"  ng-click="lightbox=null"></div>
+
+    <div class='status-bar' ng-show="status!=null">
+        {{status}}
+    </div>
 
 </body>
 </html>
