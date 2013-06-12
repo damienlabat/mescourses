@@ -148,16 +148,19 @@
 
                     </ul>
 
-                    <form ng-submit="newArticle(rayon)" class='not-in-check'>
-                        <input type="text" ng-model="articleFilter" name="article" placeholder="ajouter un article" />
-                    </form>
+                    <div class='typeahead'>
 
-                    <ul ng-show="articleFilter.length">
-                        <li ng-repeat="article in rayon.articles | FNotShow | filter:articleFilter | orderBy:'name'" style='display:inline-block'>
-                            <a href='' ng-click="selectArticle(article)">{{article.name}}</a>
-                            &nbsp;
-                        </li>
-                    </ul>
+                        <form ng-submit="newArticle(rayon)" class='not-in-check'>
+                            <input type="text" ng-model="articleFilter" name="article" placeholder="ajouter un article" />
+                        </form>
+
+                        <ul ng-show="articleFilter.length">
+                            <li ng-repeat="article in rayon.articles | FNotShow | filter:articleFilter | orderBy:'name'" style='display:inline-block'>
+                                <a href='' ng-click="selectArticle(article)">{{article.name}}</a>
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
 
                 </div>
             </li>
@@ -165,7 +168,7 @@
 
         <div ng-show="!(liste|FArticles|FSelected).length&&listemode=='check'" class='alert alert-warning'>aucun article selectionné</div>
 
-        <div class='span12 not-in-check new-rayon' ng-show='query.length==0'>
+        <div class='span12 not-in-check new-rayon typeahead' ng-show='query.length==0'>
 
             <h1>Ajouter un rayon</h1>
             <form ng-submit="newRayon()">
@@ -258,16 +261,18 @@
                 </li>
             </ul>
 
-            <form ng-submit="newRayon()">
-                <input type="text" ng-model="rayonFilter" name="rayon"  placeholder="ajouter un rayon"/>
-            </form>
+            <div class='typeahead'>
+                <form ng-submit="newRayon()">
+                    <input type="text" ng-model="rayonFilter" name="rayon"  placeholder="ajouter un rayon"/>
+                </form>
 
-            <ul ng-show="rayonFilter.length">
-                <li ng-repeat="rayon in liste | FNotShow | filter:rayonFilter | orderBy:'name'" style='display:inline-block'>
-                    <a href='' ng-click="addRayon(rayon)">{{rayon.name}}</a>
-                    &nbsp;
-                </li>
-            </ul>
+                <ul ng-show="rayonFilter.length">
+                    <li ng-repeat="rayon in liste | FNotShow | filter:rayonFilter | orderBy:'name'" style='display:inline-block'>
+                        <a href='' ng-click="addRayon(rayon)">{{rayon.name}}</a>
+                        &nbsp;
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="modal-footer">
             <button class="btn" ng-click="organize=false">fermer</button>
