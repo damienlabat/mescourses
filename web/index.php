@@ -257,6 +257,17 @@
                     <a href='' class='pull-right c{{c}}' ng-repeat="c in [9,8,7,6,5,4,3,2,1,0]" ng-class="{selected: c==rayon.color}" ng-click="changeColor(rayon,c)"></a>
                 </li>
             </ul>
+
+            <form ng-submit="newRayon()">
+                <input type="text" ng-model="rayonFilter" name="rayon"  placeholder="ajouter un rayon"/>
+            </form>
+
+            <ul ng-show="rayonFilter.length">
+                <li ng-repeat="rayon in liste | FNotShow | filter:rayonFilter | orderBy:'name'" style='display:inline-block'>
+                    <a href='' ng-click="addRayon(rayon)">{{rayon.name}}</a>
+                    &nbsp;
+                </li>
+            </ul>
         </div>
         <div class="modal-footer">
             <button class="btn" ng-click="organize=false">fermer</button>
@@ -274,6 +285,8 @@
         </div>
     </div>
     <div ng-show="lightbox!=null" class="modal-backdrop fade in"  ng-click="lightbox=null"></div>
+
+
 
     <div class='status-bar' ng-show="status!=null">
         {{status}}

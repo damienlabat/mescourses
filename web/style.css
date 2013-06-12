@@ -474,7 +474,7 @@ body.edit .article.qtt0 .article-name { text-decoration:none;}
 /* organize */
 
 
-.organize li {
+.organize .sortable li {
     color: #FFFFFF;
     font-size: 1.25em;
     border: 1px solid #fff;
