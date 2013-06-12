@@ -26,9 +26,7 @@
  	}
 
 
- 	window.onpopstate = function(event) {
-	  $scope.load(event.state);
-	};
+
 
 
 	$scope.toCompressed= function() {
@@ -212,10 +210,12 @@
 
 	$scope.load = function(filename) {
 		$scope.status='chargement en cours ...';
-		if (null==filename) filename='default';
+		if (null===filename) filename='default';
 		$http.get('./api/liste/'+filename+'.json').success(function(data) {
 			$scope.currentList=data.liste;
+			if ($scope.currentList.name=='') $scope.currentList.name='sans titre';
 			$window.history.pushState(null, null, "./"+$scope.currentList.slug);// bug
+			$window.onpopstate = function(event) {	 settimeout( function(){$scope.load(event.state);} ,100);	}; //todo! virer le timeout
 			$scope.page='liste';
 			$scope.liste=$scope.fromCompressed(data.content);
 	 	 	$scope.combineData();
@@ -230,6 +230,10 @@
 	$scope.loaduserlistes= function() {
 		$http.get('./api/liste/').success(function(data) {
 			$scope.userlistes=data;
+			angular.forEach($scope.userlistes, function(liste, key){
+	 	 		if (liste.name=='') liste.name='.sans titre';
+ 			});
+
 		});
 	};
 
@@ -277,6 +281,10 @@
 		$scope.lightbox={title:"data",content: JSON.stringify($scope.toCompressed()) };
 	}
 
+	$scope.print= function() {
+		$window.print();
+	}
+
 
 
 	// INIT
@@ -296,7 +304,6 @@
 			 	$scope.reOrderRayon( $(this).sortable( "toArray", {attribute:'data-name'} ) );
 			}
 	 	});
-
 
 
 	});

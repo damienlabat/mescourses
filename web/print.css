@@ -21,14 +21,12 @@ form,
 }
 
 .rayon > div {
-    border-color: #000 !important;
-    border-style: solid;
-    border-width: 0.5px !important;
-    border-radius: 3px !important;
+	border:none !important;
+    border-top: 1px solid #000 !important;
+    border-radius: 0 !important;
 }
 
 .rayon > div > h3 {
-	line-height: auto !important;
 	background: transparent;
 	padding:0;
 	margin:0;
@@ -59,14 +57,17 @@ li {
 }
 
 .articles-row {
-	-webkit-column-width:auto;
+	-ms-column-width:auto;
+	-webkit-column-width:auto !important;
 	-moz-column-width:auto;
 	column-width:auto;
 
-	-webkit-column-count:4;
+	-ms-column-count:4;
+	-webkit-column-count:4 !important; /* arghhhh columns dont work in chrome for print */
 	-moz-column-count:4;
 	column-count:4;
 
+	-ms-column-rule: none;
 	-moz-column-rule: none;
     -webkit-column-rule: none;
     column-rule: none;

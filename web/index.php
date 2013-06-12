@@ -64,6 +64,7 @@
                     <li><a href="" ng-click="organize=true" title='organiser les rayons'><i class="icon-magic"></i><span>organiser</span></a></li>
                     <li><a href="" ng-click="loadmenu=true" title='ouvrir'><i class="icon-file-alt"></i><span>ouvrir</span></a></li>
                     <li><a href="" ng-click="savemenu=true" title='enregistrer'><i class="icon-save"></i><span>enregistrer</span></a></li>
+                    <li ng-show="(liste|FArticles|FSelected).length"><a href="" ng-click="print()" title='imprimer'><i class="icon-print"></i><span>imprimer</span></a></li>
                 </ul>
                 <span class='pct' ng-show='listemode=="check"'>{{ppc|number:0}} %</span>
             </div>
