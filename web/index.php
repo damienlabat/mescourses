@@ -3,27 +3,29 @@
 <head>
     <title>{{currentList.name}} - {{currentList.slug}}</title>
     <script src="http://code.angularjs.org/1.1.2/angular.min.js"></script>
-    <script src="http://code.angularjs.org/1.1.2/angular-sanitize.js"></script>
+    <script src="http://code.angularjs.org/1.1.2/angular-sanitize.min.js"></script>
     <script>var mescourses={slug:"<?php
 
     echo (isset($_GET['l']) ? $_GET['l'] : 'default');
 
         ?>"};</script>
 
-    <script src="https://raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-0.3.0.min.js"></script>
+    <!--script src="./js/vendor/ui-bootstrap-0.3.0.js"></script-->
     <!--script src="https://raw.github.com/angular-ui/bootstrap/gh-pages/ui-bootstrap-tpls-0.3.0.min.js"></script-->
 
     <script src="http://code.jquery.com/jquery-2.0.0.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 
-    <script src="./js/app.js"></script>
-    <script src="./js/controllers.js"></script>
+    <!--script src="./js/app.js"></script>
+    <script src="./js/controllers.js"></script-->
+    <script src="./script.min.js"></script>
 
     <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
-    <link type='text/css' rel='stylesheet' href='./toggle-switch.css' />
+    <!--link type='text/css' rel='stylesheet' href='./toggle-switch.css' />
     <link type='text/css' rel='stylesheet' href='./style.css' />
-    <link type="text/css" rel="stylesheet" href="./print.css"  media="print" />
+    <link type="text/css" rel="stylesheet" href="./print.css"  media="print" /-->
+    <link type='text/css' rel='stylesheet' href='./style.min.css' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 
 <body class='{{listemode}}'>

@@ -1,77 +1,81 @@
-body {
-	font-family: monospace;
-	font-size:9px;
-}
+@media print
+  {
 
-* {
-	text-decoration: none !important;
-	list-style: none outside none;
-}
+	body {
+		font-family: monospace;
+		font-size:9px;
+	}
 
-a:after{content:"" !important;}
+	* {
+		text-decoration: none !important;
+		list-style: none outside none;
+	}
 
-form,
-.new-rayon,
-.qtt0,
-.option-btn,
-.article-btn,
-.btn,
-#main-navbar{
-	display:none !important;
-}
+	a:after{content:"" !important;}
 
-.rayon > div {
-	border:none !important;
-    border-top: 1px solid #000 !important;
-    border-radius: 0 !important;
-}
+	form,
+	.new-rayon,
+	.qtt0,
+	.option-btn,
+	.article-btn,
+	.btn,
+	#main-navbar{
+		display:none !important;
+	}
 
-.rayon > div > h3 {
-	background: transparent;
-	padding:0;
-	margin:0;
-	font-weight: normal;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-}
+	.rayon > div {
+		border:none !important;
+	    border-top: 1px solid #000 !important;
+	    border-radius: 0 !important;
+	}
 
-.article:before {
-	content:'☐';
-	font-size: 20px;
-	margin-right: -10px;
-}
+	.rayon > div > h3 {
+		background: transparent;
+		padding:0;
+		margin:0;
+		font-weight: normal;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	}
 
-textarea {
-	font-family: monospace;
-	font-size:9px;
-	padding:0 0 0 5px;
-	line-height: 10px;
-}
+	.article:before {
+		content:'☐';
+		font-size: 20px;
+		margin-right: -10px;
+	}
 
-h3 {
-    line-height: 10px;
-    margin: 5px !important;
-}
+	textarea {
+		font-family: monospace;
+		font-size:9px;
+		padding:0 0 0 5px;
+		line-height: 10px;
+	}
 
-li {
-    line-height: 10px;
-}
+	h3 {
+	    line-height: 10px;
+	    margin: 5px !important;
+	}
 
-.articles-row {
-	-ms-column-width:auto;
-	-webkit-column-width:auto !important;
-	-moz-column-width:auto;
-	column-width:auto;
+	li {
+	    line-height: 10px;
+	}
 
-	-ms-column-count:4;
-	-webkit-column-count:4 !important; /* arghhhh columns dont work in chrome for print */
-	-moz-column-count:4;
-	column-count:4;
+	.articles-row {
+		-ms-column-width:auto;
+		-webkit-column-width:auto !important;
+		-moz-column-width:auto;
+		column-width:auto;
 
-	-ms-column-rule: none;
-	-moz-column-rule: none;
-    -webkit-column-rule: none;
-    column-rule: none;
+		-ms-column-count:4;
+		-webkit-column-count:4 !important; /* arghhhh columns dont work in chrome for print */
+		-moz-column-count:4;
+		column-count:4;
 
-    margin-bottom: 5px !important;
+		-ms-column-rule: none;
+		-moz-column-rule: none;
+	    -webkit-column-rule: none;
+	    column-rule: none;
 
+	    margin-bottom: 5px !important;
+
+	}
 }
