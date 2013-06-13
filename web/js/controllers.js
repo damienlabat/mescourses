@@ -197,6 +197,7 @@
 		$http.put('./api/liste/',{liste:$scope.toCompressed(), name:this.listname})
 		.success(function(data) {
 			$scope.currentList=data;
+			if ($scope.currentList.name=='') $scope.currentList.name='sans titre';
 			$window.history.pushState(null, null, "./"+$scope.currentList.slug);
 			$scope.loaduserlistes();
 			$scope.savemenu=false;

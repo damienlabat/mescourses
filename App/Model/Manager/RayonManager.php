@@ -7,7 +7,7 @@ namespace App\Model\Manager{
   class RayonManager extends BaseManager
   {
 
-    protected $table='rayon';
+  /*  protected $table='rayon';
 
     public function getByName($name)
     {
@@ -26,7 +26,7 @@ namespace App\Model\Manager{
           $res[]=new Rayon($value);
 
       return $res;
-    }
+    }*/
 
 
     public function checkedRayon($rayon)

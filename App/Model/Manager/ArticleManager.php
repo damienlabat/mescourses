@@ -8,7 +8,7 @@ namespace App\Model\Manager{
   class ArticleManager extends BaseManager
   {
 
-    protected $table='article';
+   /* protected $table='article';
 
     public function getByName($rayonId, $name)
     {
@@ -26,7 +26,7 @@ namespace App\Model\Manager{
         $res[]=new Article($value);
 
       return $res;
-     }
+     }*/
 
 
     public function checkedArticle(Array $article)

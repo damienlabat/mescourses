@@ -23,7 +23,7 @@ namespace App\Model\Manager{
 
     public function getBySlug($slug)
     {
-      if ($slug=='full') return $this->getFull();
+      //if ($slug=='full') return $this->getFull();
 
       $data=$this->findBySlug($slug);
       if (FALSE !== $data) {
