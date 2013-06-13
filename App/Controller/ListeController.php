@@ -29,7 +29,19 @@ namespace App\Controller{
             $res= $app['liste_manager']->getBySlug($id);
             if (NULL == $res) return new Response( json_encode( array('error'=>"La liste '$id' n'existe pas.")), 404 );
 
-            return $app->json($res);
+            $cache_max_age = 3600 * 24 * 1;
+            $response = new Response(
+                json_encode($res),
+                200,
+                array("Content-Type" => "application/json",
+                    "public" => TRUE,
+                    "max_age" => $cache_max_age,
+                    "s_maxage" => $cache_max_age,
+                    "expires" => date('r', time()+$cache_max_age)
+                )
+            );
+
+            return $response;
         }
 
 

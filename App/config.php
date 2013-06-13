@@ -16,6 +16,7 @@ $app = new Silex\Application();
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Cookie;
+use Silex\Provider\HttpCacheServiceProvider;
 //use App\Controller;
 
 
@@ -26,6 +27,10 @@ $app = new Silex\Application();
 $app['debug'] = getenv("DEBUG")?getenv("DEBUG"):"false";
 
 $app['cookies'] = array();
+
+$app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
+    'http_cache.cache_dir' => __DIR__.'/cache/',
+));
 
 
 //see http://silex.sensiolabs.org/doc/cookbook/json_request_body.html
