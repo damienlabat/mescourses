@@ -186,6 +186,12 @@
         </div>
 
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Fork me on <a href='https://github.com/damienlabat/mescourses'>GitHub</a></p>
+        </div>
+    </footer>
     <!-- end liste -->
 
     <div ng-show="loadmenu" class="modal fade in">

@@ -39,7 +39,7 @@ body.check {
     }
 
 .container {
-    margin-bottom: 50px;
+    margin-bottom: 46px;
     margin-top: 20px;
 }
 
@@ -590,6 +590,15 @@ body.check .not-in-check {
 
  .liste-date a {
     color: #555;
+ }
+
+ footer {
+    background: rgba(255,255,255,0.25);
+ }
+
+ footer p {
+    text-align:right;
+    margin: 5px 0;
  }
 
 
