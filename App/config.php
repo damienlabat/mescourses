@@ -23,8 +23,9 @@ use Silex\Provider\HttpCacheServiceProvider;
 # bootstrap
 $app = new Silex\Application();
 
-#debug
-$app['CONFIG'] = getenv("CONFIG")?getenv("CONFIG"):"false";
+
+$app['CONFIG'] = getenv("CONFIG")?getenv("CONFIG"):"prod"; // ATTENTION prod par defaut
+require_once APPROOT.'/database/'.$app['CONFIG'].'.php';
 
 $app['cookies'] = array();
 
@@ -55,8 +56,7 @@ $app->after(function (Request $request, Response $response) use ( $app ) {
 
 
 
-if (getenv("CONFIG")) require_once APPROOT.'/database/'.getenv("CONFIG").'.php';
-  else require_once APPROOT.'/database.php';
+
 
 
 
