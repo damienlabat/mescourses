@@ -5,6 +5,8 @@ exercice AngularJS + Silex
 ##demo
 [http://lab.damienlabat.fr/mescourses](http://lab.damienlabat.fr/mescourses)
 
+![mes courses](https://lh6.googleusercontent.com/-rKcbsorLkPg/Ubw5n20Q_ZI/AAAAAAAAAP4/GwvkdsNrUDo/w506-h666-o/Capture%2Bd%2527%25C3%25A9cran%2B-%2B15062013%2B-%2B11%253A52%253A06.png)
+
 
 ##installation
 
